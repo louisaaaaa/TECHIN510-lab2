@@ -8,14 +8,27 @@ st.set_page_config(
     layout="centered"
 )
 st.title("Data Analysis and Visualization App")
+st.sidebar.success("Select a demo above.")
 
-st.markdown("This is a sample data visualization app built using Streamlit and AgGrid.")
-st.markdown("The data used in this app is the famous Iris dataset, which contains information about the flowers of the Iris species.") 
-st.markdown("You can explore the data by sorting, filtering.")   
+st.markdown("This is a sample data analysis and visualization app built using Streamlit. The data used in this app is the Iris Flowerdataset, which contains information about the flowers of the Iris species. The Iris dataset consists of 150 samples of iris flowers. There are three species of iris flowers in the dataset: setosa, versicolor, and virginica. For each sample, the dataset contains the following information: sepal length, sepal width, petal length, petal width, and the species of the flower.")
+st.image('iris.jpg', caption='Iris Flower')
+st.markdown("You can explore the data by sorting, filtering. You can also visualize the data using various plots such as histograms and pairplots.")   
+
+st.header("Observations:")   
+st.markdown("1. The dataset contains 150 samples of iris flowers.")
+st.markdown("2. There are three species of iris flowers in the dataset: setosa, versicolor, and virginica.")
+st.markdown("3. Iris virginica has the largest sepal length among the three species.")
+st.markdown("4. Iris setosa has the smallest petal width among the three species.")   
+
+st.markdown("Here is the Raw Data:")   
 
 iris_df = pd.read_csv('IRIS.csv')
 
+with st.expander("Raw Data"):
+    st.write(iris_df)
 # Species filter
+
+st.markdown("You can fliter by species or by sepal length:")  
 species_filter = st.selectbox("Filter by Species", iris_df['species'].unique())
 
 # Sepal Length slider
@@ -41,5 +54,3 @@ elif plot_type == "Pairplot":
     fig = sns.pairplot(filtered_df, hue="species")
     st.pyplot(fig)
     
-# Page 2: New Page
-st.title("New Page")
